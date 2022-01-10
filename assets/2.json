@@ -1,0 +1,19 @@
+{
+  "name": "Tom's NFT number 2",
+  "symbol": "",
+  "image": "0.png",
+  "properties": {
+    "files": [
+      {
+        "uri": "2.png",
+        "type": "image/png"
+      }
+    ],
+    "creators": [
+      {
+        "address": "G8X7vC1Gz4ktZXdT391VfHmABeYtJPuESb5gVjMiQzaw",
+        "share": 100
+      }
+    ]
+  }
+}
