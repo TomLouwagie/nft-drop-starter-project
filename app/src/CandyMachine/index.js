@@ -394,21 +394,23 @@ const CandyMachine = ({ walletAddress }) => {
     // Only show this if machineStats is available
     candyMachine && (
       <div className="machine-container">
-        <p>{`Drop Date: ${candyMachine.state.goLiveDateTimeString}`}</p>
+        {renderDropTimer()}
         <p>{`Items Minted: ${candyMachine.state.itemsRedeemed} / ${candyMachine.state.itemsAvailable}`}</p>
-        <button className="cta-button mint-button" 
-        onClick={mintToken}
-        // Add this disabled state and have it listen to isMinting
-        disabled={isMinting}
-        >
-          Mint NFT
-        </button>
+        {candyMachine.state.itemsRedeemed === candyMachine.state.itemsAvailable ? (
+            <p className="sub-text">Sold Out 🙊</p>
+          ) : (
+          <button className="cta-button mint-button" 
+          onClick={mintToken}
+          disabled={isMinting}
+          >
+            Mint NFT
+          </button>
+        )}
         {isLoadingMints && <p>LOADING MINTS...</p>}
         {mints.length > 0 && renderMintedItems()}
       </div>
     )
   );
-
 };
 
 // Create render function
@@ -427,29 +429,5 @@ const renderDropTimer = () => {
   // Else let's just return the current drop date
   return <p>{`Drop Date: ${candyMachine.state.goLiveDateTimeString}`}</p>;
 };
-
-return (
-  candyMachine.state && (
-    <div className="machine-container">
-      {/* Add this at the beginning of our component */}
-      {renderDropTimer()}
-      <p>{`Items Minted: ${candyMachine.state.itemsRedeemed} / ${candyMachine.state.itemsAvailable}`}</p>
-        {/* Check to see if these properties are equal! */}
-        {candyMachine.state.itemsRedeemed === candyMachine.state.itemsAvailable ? (
-          <p className="sub-text">Sold Out 🙊</p>
-        ) : (
-        <button
-          className="cta-button mint-button"
-          onClick={mintToken}
-          disabled={isMinting}
-        >
-          Mint NFT
-        </button>
-      )}
-      {mints.length > 0 && renderMintedItems()}
-      {isLoadingMints && <p>LOADING MINTS...</p>}
-    </div>
-  )
-);
 
 export default CandyMachine;
